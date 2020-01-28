@@ -1,4 +1,4 @@
-package: github.com/unchris/pgpool2-exporter
+package: github.com/navcanada/pgpool2-exporter
 import:
 - package: github.com/prometheus/client_golang
   subpackages:
