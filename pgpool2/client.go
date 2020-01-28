@@ -252,6 +252,10 @@ func NodeInfoUnmarshal(cmdOutBuff io.Reader) (NodeInfo, error) {
 			}
 			ni.Port = portInt
 		}
+		// this has to be tested before "Status"
+		if strings.Contains(line, "Last Status Change") {
+			ni.LastStatusChange = ExtractValueFromPCPString(line)
+		}
 		if strings.Contains(line, "Status") {
 			statusRaw := ExtractValueFromPCPString(line)
 			statusInt, err := strconv.Atoi(statusRaw)
@@ -285,9 +289,6 @@ func NodeInfoUnmarshal(cmdOutBuff io.Reader) (NodeInfo, error) {
 		}
 		if strings.Contains(line, "Replication Sync State") {
 			ni.ReplicationSyncState = ExtractValueFromPCPString(line)
-		}
-		if strings.Contains(line, "Last Status Change") {
-			ni.LastStatusChange = ExtractValueFromPCPString(line)
 		}
 	}
 	return ni, nil
