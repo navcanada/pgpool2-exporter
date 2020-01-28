@@ -109,9 +109,6 @@ func (e *Exporter) collectNodeMetrics(ch chan<- prometheus.Metric) error {
 		if err != nil {
 			return fmt.Errorf("ExecNodeInfo(%d) error: %v", i, err)
 		}
-		logrus.Infof("nodeInfo.ReplicationState: %s", nodeInfo.ReplicationState)
-		logrus.Infof("nodeInfo.ReplicationSyncState: %s", nodeInfo.ReplicationSyncState)
-		logrus.Infof("nodeInfo.LastStatusChange: %s", nodeInfo.lastStatusChange)
 		ch <- prometheus.MustNewConstMetric(
 			PoolNodeInfo,
 			prometheus.GaugeValue,
